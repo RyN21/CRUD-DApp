@@ -10,6 +10,14 @@ contract Crud {
 
   function create(string memory name) public {
     users.push(User(nextId, name));
-    nextId++; 
+    nextId++;
+  }
+
+  function read(uint id) view public returns(uint, string memory) {
+    for(uint i = 0; i < users.length; i++) {
+      if(users[i].id == id) {
+        return(users[i].id, users[i].name);
+      }
+    }
   }
 }
