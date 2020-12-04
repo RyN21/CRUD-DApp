@@ -24,19 +24,20 @@ contract Crud {
   // read function takes an id as an argument
   // returns two values, id and name
   function read(uint id) view public returns(uint, string memory) {
-    uint i = find(id)
+    uint i = find(id);
     return(users[i].id, users[i].name);
   }
 
   // undate takes two arguments id and value of what we want to update
   function update(uint id, string memory name) public {
-    uint i = find(id)
+    uint i = find(id);
     users[i].name = name;
   }
 
   function destroy(uint id) public {
+    uint i = find(id);
     // use delete keyword
-    delete users[id];
+    delete users[i];
   }
 
   // Refactoring: Pull out the logic in both the read and update function to a 'find' function.
