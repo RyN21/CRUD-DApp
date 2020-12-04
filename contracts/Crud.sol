@@ -5,4 +5,5 @@ contract Crud {
     uint id;
     string name;
   }
+  User[] public users;
 }
