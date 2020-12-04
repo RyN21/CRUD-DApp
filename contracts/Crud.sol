@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0
+pragma solidity ^0.5.0;
 
 contract Crud {
   // Structs allow you to create custom types
@@ -24,31 +24,30 @@ contract Crud {
   // read function takes an id as an argument
   // returns two values, id and name
   function read(uint id) view public returns(uint, string memory) {
-    // for loop:
-    //  - define an integer 'i'
-    //  - create a stopping condition 'i < users.length'
-    //  - incrament 'i' for each pass
-    for(uint i = 0; i < users.length; i++) {
-      // returns id and name when "users[i].id is equal to the argument's 'id' "
-      if(users[i].id == id) {
-        return(users[i].id, users[i].name);
-      }
-    }
+    uint i = find(id)
+    return(users[i].id, users[i].name);
   }
 
   // undate takes two arguments id and value of what we want to update
   function update(uint id, string memory name) public {
-    // similar logic as the read function to start off with
-    for(uint i = 0; i < users.length; i++) {
-      if(users[i].id == id) {
-        // when the correct struct instance is found, reassign the new name parameter recieved
-        users[i].name = name;
-      }
-    }
+    uint i = find(id)
+    users[i].name = name;
   }
 
   function destroy(uint id) public {
     // use delete keyword
     delete users[id];
+  }
+
+  // Refactoring: Pull out the logic in both the read and update function to a 'find' function.
+  function find(uint id) view internal returns(uint) {
+    // for loop:
+    //  - define an integer 'i'
+    //  - create a stopping condition 'i < users.length'
+    //  - incrament 'i' for each pass
+    for(uint i = 0; i < users.length; i++) }
+      if(users[i].id == id) {
+        return i;
+      }
   }
 }
