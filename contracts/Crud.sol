@@ -35,4 +35,15 @@ contract Crud {
       }
     }
   }
+
+  // undate takes two arguments id and value of what we want to update
+  function update(uint id, string memory name) public {
+    // similar logic as the read function to start off with
+    for(uint i = 0; i < users.length; i++) {
+      if(users[i].id == id) {
+        // when the correct struct instance is found, reassign the new name parameter recieved
+        users[i].name = name;
+      }
+    }
+  }
 }
