@@ -46,9 +46,11 @@ contract Crud {
     //  - define an integer 'i'
     //  - create a stopping condition 'i < users.length'
     //  - incrament 'i' for each pass
-    for(uint i = 0; i < users.length; i++) }
+    for(uint i = 0; i < users.length; i++) {
       if(users[i].id == id) {
         return i;
       }
+    }
+    revert('User does not exist!');
   }
 }
