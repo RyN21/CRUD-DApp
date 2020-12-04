@@ -1,9 +1,9 @@
-const Crud = artifacts.require('Crud')
+const Crud = artifacts.require('Crud');
 
 contract('Crud', () => {
   let crud = null;
   before(async() => {
-    crud = await Crud.depolyed();
+    crud = await Crud.deployed();
   });
 
   // async is used because we will use await
@@ -45,6 +45,16 @@ contract('Crud', () => {
     await crud.destroy(1);
     try {
       await crud.read(1);
+    } catch(error) {
+      assert(error.message.includes('User does not exist!'));
+      return;
+    }
+    assert(false);
+  });
+
+  it('Should NOT delete a non-existing user', async () => {
+    try {
+      await crud.destroy(10);
     } catch(error) {
       assert(error.message.includes('User does not exist!'));
       return;
