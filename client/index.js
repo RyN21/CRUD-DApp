@@ -39,6 +39,28 @@ const initContract = () => {
 };
 
 const initApp = () => {
+  const $create = document.getElementById('create');
+  const $createResult = document.getElementById('create-result');
+  let accounts = [];
+
+  web3.eth.getAccounts()
+    .then(_accounts => {
+      accounts = _accounts;
+    });
+
+  $create.addEventListener('submit', e => {
+    e.preventDefault();
+    const name = e.target.elements[0].value;
+    crud.methods
+      .create(name)
+      .send({from: accounts[0]})
+      .then(() => {
+        $createResult.innerHTML = `New User ${name} was successfully created!`;
+      })
+      .catch(() => {
+        $createResult.innerHTML = 'Ooops... There was an error while trying to create a new user';
+      });
+  });
 };
 
 document.addEventListener('DOMContentLoaded', () => {
