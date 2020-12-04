@@ -6,4 +6,5 @@ contract Crud {
     string name;
   }
   User[] public users;
+  uint public nextId;
 }
