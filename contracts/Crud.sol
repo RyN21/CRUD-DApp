@@ -10,7 +10,7 @@ contract Crud {
   // Reuses users type definition and spescify it as an array.
   User[] public users;
   // nextId starts at 0
-  uint public nextId;
+  uint public nextId = 1;
 
   // create function to create a User type
   // Users only takes in one argument, a string: name
