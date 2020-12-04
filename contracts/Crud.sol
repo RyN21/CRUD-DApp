@@ -46,4 +46,9 @@ contract Crud {
       }
     }
   }
+
+  function destroy(uint id) public {
+    // use delete keyword
+    delete users[id];
+  }
 }
