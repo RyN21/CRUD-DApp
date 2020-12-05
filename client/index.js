@@ -41,6 +41,12 @@ const initContract = () => {
 const initApp = () => {
   const $create = document.getElementById('create');
   const $createResult = document.getElementById('create-result');
+  const $read = document.getElementById('read');
+  const $readResult = document.getElementById('read-result');
+  const $edit = document.getElementById('edit');
+  const $editResult = document.getElementById('edit-result');
+  const $delete = document.getElementById('delete');
+  const $deleteResult = document.getElementById('delete-result');
   let accounts = [];
 
   web3.eth.getAccounts()
@@ -59,6 +65,48 @@ const initApp = () => {
       })
       .catch(() => {
         $createResult.innerHTML = 'Ooops... There was an error while trying to create a new user';
+      });
+  });
+
+  $read.addEventListener('submit', e => {
+    e.preventDefault();
+    const id = e.target.elements[0].value;
+    crud.methods
+      .read(id)
+      .call()
+      .then(result => {
+        $readResult.innerHTML = `Id: ${result[0]} Name: ${result[1]}`;
+      })
+      .catch(() => {
+        $readResult.innerHTML = `Oooops... There was a problem while trying to read user ${id}`;
+      });
+  });
+
+  $edit.addEventListener('submit', e => {
+    e.preventDefault();
+    const id = e.target.elements[0].value;
+    const name = e.target.elements[1].value;
+    crud.methods
+      .update(id, name)
+      .send({from: accounts[0]})
+      .then(() => {
+        $editResult.innerHTML = `Changed name of user ${id} to ${name}`;
+      })
+      .catch(() => {
+        $editResult.innerHTML = `Oooops... there was an error when trying to update user id: ${id}`;
+      });
+  });
+
+  $delete.addEventListener('submit', e => {
+    const id = e.target.elements[0].value;
+    crud.methods
+      .destroy(id)
+      .send({from: accounts[0]})
+      .then(() => {
+        $deleteResult.innerHTML = `User id: ${id} has been deleted`;
+      })
+      .catch(() => {
+        $deleteResult.innerHTML = `Oooops... there was an error while trying to delete user id: ${id}`;
       });
   });
 };
