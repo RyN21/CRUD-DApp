@@ -18,6 +18,30 @@ module.exports = {
   }
 };
 
+// Deploy to MainNet use this:
+// module.exports = {
+//   networks: {
+//     mainnet: {
+//       provider: () =>
+//         new HDWalletProvider(
+//           // Be more careful with seed phrase
+//           // Seed phrase you use only on mainnet
+//           // Funding the address:
+//           //  - Register to an exchange like coinbase
+//           //  - Place an order to buy real ether
+//           //  - Use the wallet to send to metamask address
+//           //  - Recieve ether
+//           //  - Use new seed phrase for metamask
+//           //  - Use seed phrase to deploy smart contract to mainnet
+//           //  - Real ether will be used to pay for deployment
+//           secrets.seed,
+//           `https://mainnet.infura.io/v3/${secrets.mainNet}`
+//         ),
+//       network_id: 1
+//     }
+//   }
+// };
+
 // this allows you connect to the ropsten network and is secure
 // provider will tell web3 how we can connect to the blockchain of this network
 //privat key how web3 will sign transaction
